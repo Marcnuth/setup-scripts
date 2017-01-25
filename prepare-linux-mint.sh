@@ -33,23 +33,12 @@ cp tmux.conf ~/.tmux.conf
 chmod 666 ~/.tmux.conf
 
 # docker
-which docker
-if [ $? -ne 0 ]; then
-    # https://docs.docker.com/engine/installation/linux/ubuntulinux/
-    sudo apt -y install apt-transport-https ca-certificates
-    sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
-    echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
-    sudo apt update
-    sudo apt-get install docker-engine
-    sudo service docker start
-    sudo groupadd docker
-    sudo usermod -aG docker $USER
-fi
-echo '=> Docker is installed'
+sudo ./prepare-docker.sh
 
 # python & packages
 sudo apt-get -y install python3-pip
 sudo apt-get -y install python3-setuptools
+sudo apt-get -y install python3-tk
 echo '=> Python3-pip is installed'
 
 # machine learning packages
@@ -64,10 +53,17 @@ sudo pip3 install matplotlib
 sudo pip3 install seaborn
 sudo pip3 install tensorflow
 sudo pip3 install jupyter
+sudo pip3 install -U scikit-image
+sudo pip3 install -U pydicom
+sudo pip3 install -U keras
+sudo pip3 install -U SimpleITK
 sudo ./prepare-xgboost.sh
-
-
-
 
 # others
 sudo pip3 install docopt
+sudo pip3 install rope
+sudo pip3 install jedi
+sudo pip3 install flake8
+sudo pip3 install importmagic
+sudo pip3 install autopep8
+sudo pip3 install yapf
