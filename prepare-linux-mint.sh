@@ -1,14 +1,7 @@
 sudo apt-get update
 
 # emacs
-which emacs
-if [ $? -ne 0 ]; then
-    sudo apt-get -y install emacs
-fi
-echo '=> Emacs is installed'
-mv -f ~/.emacs ~/.emacs.bak
-cp emacs.conf ~/.emacs
-chmod 666 ~/.emacs
+sudo ./prepare-emacs.sh
 
 
 # zsh
