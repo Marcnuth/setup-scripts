@@ -9,6 +9,8 @@ echo '=> Emacs is installed'
 sudo apt-get install ruby-dev
 sudo gem install redcarpet --conservative
 
+sudo apt-get install graphviz
+
 
 ## add config files
 

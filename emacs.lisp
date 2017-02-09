@@ -2,7 +2,7 @@
 ;; Install necessary packages if not
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; list the packages you want
-(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode))
+(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+))
 
 (require 'package)
 ; list the repositories containing them
@@ -59,5 +59,11 @@
 (setq backup-directory-alist (quote (("." . "~/.backups"))))
 
 (setq org-log-done 'note)
-(setq org-agenda-window-setup 'current-window) 
+(setq org-agenda-window-setup 'current-window)
+
+;; make org-mode support graphviz
+;; http://shanth.xyz/mindmap_using_graphviz_orgmode.html#orgheadline3
+(org-babel-do-load-languages
+ (quote org-babel-load-languages)
+ (quote ((dot . t))))
 
