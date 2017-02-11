@@ -60,3 +60,7 @@ sudo pip3 install flake8
 sudo pip3 install importmagic
 sudo pip3 install autopep8
 sudo pip3 install yapf
+
+
+# parepare fonts
+# https://gist.github.com/rogerleite/99819

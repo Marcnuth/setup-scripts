@@ -2,7 +2,7 @@
 ;; Install necessary packages if not
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; list the packages you want
-(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+))
+(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode))
 
 (require 'package)
 ; list the repositories containing them
@@ -43,6 +43,7 @@
  '(custom-enabled-themes (quote (misterioso)))
  '(display-time-mode t)
  '(line-number-mode nil)
+ '(menu-bar-mode nil)
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
@@ -52,7 +53,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "DejaVu Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 113 :width normal)))))
+ '(default ((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 113 :width normal))))
+ '(cursor ((t (:background "yellow"))))
+ '(highlight ((t (:background "chartreuse" :foreground "black"))))
+ '(region ((t (:background "chartreuse" :foreground "black")))))
 
 
 ;; all backups goto ~/.backups instead of in the current directory
@@ -68,6 +72,8 @@
  (quote ((dot . t))))
 
 
-
+;; make emacs split horizontally
+(setq split-height-threshold nil)
+(setq split-width-threshold 0)
 
 
