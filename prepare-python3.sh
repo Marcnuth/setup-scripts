@@ -24,10 +24,10 @@ sudo pip3 install -U SimpleITK
 sudo ./prepare-xgboost.sh
 
 # others
-sudo pip3 install docopt
-sudo pip3 install rope
-sudo pip3 install jedi
-sudo pip3 install flake8
-sudo pip3 install importmagic
-sudo pip3 install autopep8
-sudo pip3 install yapf
+sudo pip3 install --upgrade docopt
+sudo pip3 install --upgrade rope
+sudo pip3 install --upgrade jedi
+sudo pip3 install --upgrade flake8
+sudo pip3 install --upgrade importmagic
+sudo pip3 install --upgrade autopep8
+sudo pip3 install --upgrade yapf

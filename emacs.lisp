@@ -46,6 +46,7 @@
  '(display-time-mode t)
  '(line-number-mode nil)
  '(menu-bar-mode nil)
+ '(python-shell-interpreter "python3")
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
