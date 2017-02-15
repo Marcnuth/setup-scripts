@@ -2,14 +2,16 @@
 ;; Install necessary packages if not
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; list the packages you want
-(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode))
+(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode elpy))
 
 (require 'package)
 ; list the repositories containing them
-(setq package-archives '(("elpa" . "http://tromey.com/elpa/")
+(setq package-archives '(("elpy" . "http://jorgenschaefer.github.io/packages/")
+			 ("elpa" . "http://tromey.com/elpa/")
                          ("gnu" . "http://elpa.gnu.org/packages/")
                          ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")))
+			 ("melpa" . "https://melpa.org/packages/")
+			 ))
 
 ; activate all the packages (in particular autoloads)
 (package-initialize)
@@ -65,15 +67,28 @@
 (setq org-log-done 'note)
 (setq org-agenda-window-setup 'current-window)
 
+
+
+;; org-mode
 ;; make org-mode support graphviz
 ;; http://shanth.xyz/mindmap_using_graphviz_orgmode.html#orgheadline3
+(setq org-babel-python-command "python3")
+
 (org-babel-do-load-languages
  (quote org-babel-load-languages)
- (quote ((dot . t))))
+ (quote ((dot . t)
+	 (python . t)
+	 )))
+
+
 
 
 ;; make emacs split horizontally
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
 
+
+;; elpy
+(elpy-enable)
+(setq elpy-rpc-python-command "python3")
 
