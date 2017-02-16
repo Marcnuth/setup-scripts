@@ -3,3 +3,6 @@ alias ff find-file $1
 alias clear recenter 0
 alias la ls -lha $*
 alias ll ls -lh $*
+alias .. cd ..
+alias ... cd ../..
+alias .... cd ../../..

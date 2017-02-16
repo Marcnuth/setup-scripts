@@ -61,6 +61,9 @@
  '(highlight ((t (:background "chartreuse" :foreground "black"))))
  '(region ((t (:background "chartreuse" :foreground "black")))))
 
+;; eshell: case insensitive matching
+(setq eshell-cmpl-ignore-case t)
+
 
 ;; all backups goto ~/.backups instead of in the current directory
 (setq backup-directory-alist (quote (("." . "~/.backups"))))
@@ -82,8 +85,6 @@
 	 )))
 
 
-
-
 ;; make emacs split horizontally
 (setq split-height-threshold nil)
 (setq split-width-threshold 0)
@@ -92,4 +93,8 @@
 ;; elpy
 (elpy-enable)
 (setq elpy-rpc-python-command "python3")
+
+;; shortcut for elpy
+(global-set-key (kbd "C-c l") 'elpy-shell-send-current-statement)
+(global-set-key (kbd "C-c r") 'elpy-shell-send-region-or-buffer)
 
