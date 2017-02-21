@@ -21,6 +21,7 @@ sudo pip3 install -U scikit-image
 sudo pip3 install -U pydicom
 sudo pip3 install -U keras
 sudo pip3 install -U SimpleITK
+sudo pip3 install -U statsmodels
 sudo ./prepare-xgboost.sh
 
 # others
