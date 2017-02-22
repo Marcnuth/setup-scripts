@@ -19,19 +19,20 @@ sudo apt-get install graphviz
 
 sudo mkdir -p ~/.config/
 
-rm -rf ~/.config/flake8.bak
-rm -rf ~/.emacs.bak
-rm -rf ~/.emacs.d.bak
+rm -rf ~/.config/flake8.bak 2>/dev/null
+rm -rf ~/.emacs.bak 2>/dev/null
+rm -rf ~/.emacs.d.bak 2>/dev/null
 
 #echo '==> After removed:'
 #ls ~/.emacs*
-mv -f ~/.config/flake8 ~/config/flake8.bak
-mv -f ~/.emacs ~/.emacs.bak
-mv -f ~/.emacs.d ~/.emacs.d.bak
+mv -f ~/.config/flake8 ~/.config/flake8.bak 2>/dev/null
+mv -f ~/.emacs ~/.emacs.bak 2>/dev/null
+mv -f ~/.emacs.d ~/.emacs.d.bak 2>/dev/null
 
 #echo '==> After backup:'
 #ls ~/.emacs*
-sudo cp flake8.conf ~/config/flake8
+
+sudo cp flake8.conf ~/.config/flake8
 sudo cp emacs.lisp ~/.emacs
 sudo cp -rf emacs.d ~/.emacs.d
 chmod 666 ~/.emacs

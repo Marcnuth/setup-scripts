@@ -2,16 +2,16 @@
 ;; Install necessary packages if not
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; list the packages you want
-(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode elpy helm))
+(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode elpy helm helm-projectile))
 
 (require 'package)
 ; list the repositories containing them
 (setq package-archives '(("elpy" . "http://jorgenschaefer.github.io/packages/")
 			 ("elpa" . "http://tromey.com/elpa/")
-                         ("gnu" . "http://elpa.gnu.org/packages/")
-                         ("marmalade" . "http://marmalade-repo.org/packages/")
-			 ("melpa" . "https://melpa.org/packages/")
-			 ))
+                         ("gnu" . "http://elpa.emacs-china.org/gnu/")
+                         ("marmalade" . "http://elpa.emacs-china.org/marmalade/")
+                         ("melpa" . "http://elpa.emacs-china.org/melpa/")
+                         ))
 
 ; activate all the packages (in particular autoloads)
 (package-initialize)
@@ -68,10 +68,25 @@
 ;; all backups goto ~/.backups instead of in the current directory
 (setq backup-directory-alist (quote (("." . "~/.backups"))))
 
-(setq org-log-done 'note)
-(setq org-agenda-window-setup 'current-window)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; org
+
+; colorful code block: http://orgmode.org/worg/org-contrib/babel/examples/fontify-src-code-blocks.html
+(setq org-src-fontify-natively t)
+
+(defface org-block-begin-line
+  '((t (:underline "#3e6b99" :foreground "#ffffff" :background "#3e6b99")))
+  "Face used for the line delimiting the begin of source blocks.")
+
+(defface org-block-background
+  '((t (:background "#222933")))
+  "Face used for the source block background.")
+
+(defface org-block-end-line
+  '((t (:overline "#3e6b99" :foreground "#ffffff" :background "#3e6b99")))
+  "Face used for the line delimiting the end of source blocks.")
 
 ;; org-mode
 ;; make org-mode support graphviz
@@ -90,6 +105,7 @@
 (setq split-width-threshold 0)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; elpy
 (elpy-enable)
 (setq elpy-rpc-python-command "python3")
@@ -140,9 +156,10 @@
 (add-hook 'helm-minibuffer-set-up-hook
           'spacemacs//helm-hide-minibuffer-maybe)
 
-(setq helm-autoresize-max-height 0)
-(setq helm-autoresize-min-height 20)
-(helm-autoresize-mode 1)
+;(setq helm-autoresize-max-height 0)
+;(setq helm-autoresize-min-height 20)
+;(helm-autoresize-mode 1)
+; (helm-autoresize-mode t)
 
 (helm-mode 1)
 
@@ -151,5 +168,49 @@
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
 (define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
 
-(helm-autoresize-mode t)
+
+
+;;(defun pl/helm-alive-p ()
+;;  (if (boundp 'helm-alive-p)
+;;      (symbol-value 'helm-alive-p)))
+;;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
+
+(global-set-key (kbd "M-x") 'helm-M-x)
+;(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+;(global-set-key (kbd "C-x b") 'helm-mini)
+;(global-set-key (kbd "C-x C-f") 'helm-find-files)
+;(global-set-key (kbd "C-c h o") 'helm-occur)
+;(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+;(global-set-key (kbd "C-c h x") 'helm-register)
+;(global-set-key (kbd "C-c h M-:") 'helm-eval-expression-with-eldoc)
+
+
+(setq helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match    t)
+
+(setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
+(setq helm-locate-fuzzy-match t)
+(setq helm-apropos-fuzzy-match t)
+(setq helm-lisp-fuzzy-completion t)
+
+(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
+
+(when (executable-find "ack-grep")
+  (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
+        helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
+
+(require 'helm-eshell)
+
+(add-hook 'eshell-mode-hook
+          #'(lambda ()
+              (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
+
+
+;; projectile, refers to http://tuhdo.github.io/helm-projectile.html
+(projectile-global-mode)
+(setq projectile-completion-system 'helm)
+(helm-projectile-on)
+
+(setq projectile-indexing-method 'alien)
 
