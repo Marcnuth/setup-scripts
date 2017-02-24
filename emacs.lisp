@@ -2,7 +2,7 @@
 ;; Install necessary packages if not
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; list the packages you want
-(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode elpy helm helm-projectile))
+(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode elpy realgud ivy swiper counsel))
 
 (require 'package)
 ; list the repositories containing them
@@ -99,6 +99,10 @@
 	 (python . t)
 	 )))
 
+(defun my-org-confirm-babel-evaluate (lang body)
+  (not (string= lang "python")))  ; don't ask for this lang
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate)
+
 
 ;; make emacs split horizontally
 (setq split-height-threshold nil)
@@ -115,102 +119,24 @@
 (global-set-key (kbd "C-c r") 'elpy-shell-send-region-or-buffer)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; helm
-;; refer to http://tuhdo.github.io/helm-intro.html#orgheadline33
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; ivy
 
-(require 'helm)
-(require 'helm-config)
-
-;; The default "C-x c" is quite close to "C-x C-c", which quits Emacs.
-;; Changed to "C-c h". Note: We must set "C-c h" globally, because we
-;; cannot change `helm-command-prefix-key' once `helm-config' is loaded.
-(global-set-key (kbd "C-c h") 'helm-command-prefix)
-(global-unset-key (kbd "C-x c"))
-
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to run persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB work in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-
-(when (executable-find "curl")
-  (setq helm-google-suggest-use-curl-p t))
-
-(setq helm-split-window-in-side-p           t ; open helm buffer inside current window, not occupy whole other window
-      helm-move-to-line-cycle-in-source     t ; move to end or beginning of source when reaching top or bottom of source.
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t
-      helm-echo-input-in-header-line t)
-
-(defun spacemacs//helm-hide-minibuffer-maybe ()
-  "Hide minibuffer in Helm session if we use the header line as input field."
-  (when (with-helm-buffer helm-echo-input-in-header-line)
-    (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
-      (overlay-put ov 'window (selected-window))
-      (overlay-put ov 'face
-                   (let ((bg-color (face-background 'default nil)))
-                     `(:background ,bg-color :foreground ,bg-color)))
-      (setq-local cursor-type nil))))
-
-
-(add-hook 'helm-minibuffer-set-up-hook
-          'spacemacs//helm-hide-minibuffer-maybe)
-
-;(setq helm-autoresize-max-height 0)
-;(setq helm-autoresize-min-height 20)
-;(helm-autoresize-mode 1)
-; (helm-autoresize-mode t)
-
-(helm-mode 1)
-
-;;
-(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action) ; rebind tab to do persistent action
-(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action) ; make TAB works in terminal
-(define-key helm-map (kbd "C-z")  'helm-select-action) ; list actions using C-z
-
-
-
-;;(defun pl/helm-alive-p ()
-;;  (if (boundp 'helm-alive-p)
-;;      (symbol-value 'helm-alive-p)))
-;;(add-to-list 'golden-ratio-inhibit-functions 'pl/helm-alive-p)
-
-(global-set-key (kbd "M-x") 'helm-M-x)
-;(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-;(global-set-key (kbd "C-x b") 'helm-mini)
-;(global-set-key (kbd "C-x C-f") 'helm-find-files)
-;(global-set-key (kbd "C-c h o") 'helm-occur)
-;(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
-;(global-set-key (kbd "C-c h x") 'helm-register)
-;(global-set-key (kbd "C-c h M-:") 'helm-eval-expression-with-eldoc)
-
-
-(setq helm-buffers-fuzzy-matching t
-      helm-recentf-fuzzy-match    t)
-
-(setq helm-semantic-fuzzy-match t
-      helm-imenu-fuzzy-match    t)
-(setq helm-locate-fuzzy-match t)
-(setq helm-apropos-fuzzy-match t)
-(setq helm-lisp-fuzzy-completion t)
-
-(setq helm-M-x-fuzzy-match t) ;; optional fuzzy matching for helm-M-x
-
-(when (executable-find "ack-grep")
-  (setq helm-grep-default-command "ack-grep -Hn --no-group --no-color %e %p %f"
-        helm-grep-default-recurse-command "ack-grep -H --no-group --no-color %e %p %f"))
-
-(require 'helm-eshell)
-
-(add-hook 'eshell-mode-hook
-          #'(lambda ()
-              (define-key eshell-mode-map (kbd "C-c C-l")  'helm-eshell-history)))
-
-
-;; projectile, refers to http://tuhdo.github.io/helm-projectile.html
-(projectile-global-mode)
-(setq projectile-completion-system 'helm)
-(helm-projectile-on)
-
-(setq projectile-indexing-method 'alien)
-
+(ivy-mode 1)
+(setq ivy-use-virtual-buffers t)
+(global-set-key "\C-s" 'swiper)
+(global-set-key (kbd "C-c C-r") 'ivy-resume)
+(global-set-key (kbd "<f6>") 'ivy-resume)
+(global-set-key (kbd "M-x") 'counsel-M-x)
+(global-set-key (kbd "C-x C-f") 'counsel-find-file)
+(global-set-key (kbd "<f1> f") 'counsel-describe-function)
+(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+(global-set-key (kbd "<f1> l") 'counsel-find-library)
+(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+(global-set-key (kbd "C-c g") 'counsel-git)
+(global-set-key (kbd "C-c j") 'counsel-git-grep)
+(global-set-key (kbd "C-c k") 'counsel-ag)
+(global-set-key (kbd "C-x l") 'counsel-locate)
+(global-set-key (kbd "C-S-o") 'counsel-rhythmbox)
+(define-key read-expression-map (kbd "C-r") 'counsel-expression-history)
