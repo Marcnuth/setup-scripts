@@ -32,3 +32,6 @@ sudo pip3 install --upgrade flake8
 sudo pip3 install --upgrade importmagic
 sudo pip3 install --upgrade autopep8
 sudo pip3 install --upgrade yapf
+sudo pip3 install --upgrade ipdb
+sudo pip3 install --upgrade pdb
+ln -sf /usr/local/bin/ipdb3 /usr/local/bin/ipdb 

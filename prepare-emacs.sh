@@ -27,15 +27,14 @@ rm -rf ~/.emacs.d.bak 2>/dev/null
 #ls ~/.emacs*
 mv -f ~/.config/flake8 ~/.config/flake8.bak 2>/dev/null
 mv -f ~/.emacs ~/.emacs.bak 2>/dev/null
+mv -f ~/.spacemacs ~/.spacemacs.bak 2>/dev/null
 mv -f ~/.emacs.d ~/.emacs.d.bak 2>/dev/null
 
 #echo '==> After backup:'
 #ls ~/.emacs*
 
 sudo cp flake8.conf ~/.config/flake8
-sudo cp emacs.lisp ~/.emacs
 sudo cp -rf emacs.d ~/.emacs.d
-chmod 666 ~/.emacs
 chmod -R 777 ~/.emacs.d
 
 #echo '==> After adding config files:'

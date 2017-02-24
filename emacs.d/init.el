@@ -41,12 +41,15 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-faces-vector
    [default default default italic underline success warning error])
+ '(ansi-color-names-vector
+   ["black" "#d55e00" "#009e73" "#f8ec59" "#0072b2" "#cc79a7" "#56b4e9" "white"])
  '(column-number-mode t)
  '(custom-enabled-themes (quote (misterioso)))
  '(display-time-mode t)
  '(line-number-mode nil)
  '(menu-bar-mode nil)
- '(python-shell-interpreter "python3")
+ '(python-shell-interpreter "ipython3")
+ '(python-shell-interpreter-args "-i --simple-prompt")
  '(scroll-bar-mode nil)
  '(size-indication-mode t)
  '(tool-bar-mode nil)
@@ -68,6 +71,12 @@
 ;; all backups goto ~/.backups instead of in the current directory
 (setq backup-directory-alist (quote (("." . "~/.backups"))))
 
+
+
+;; auto linum mode when python modex
+(dolist (hook '(python-mode-hook
+		c-mode-common-hook))
+  (add-hook hook (lambda () (linum-mode t))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -119,8 +128,6 @@
 (global-set-key (kbd "C-c r") 'elpy-shell-send-region-or-buffer)
 
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ivy
 
 (ivy-mode 1)
 (setq ivy-use-virtual-buffers t)
