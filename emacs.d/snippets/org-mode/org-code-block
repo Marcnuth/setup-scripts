@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: org-code-block
+# key: org-code-block
+# --
+#+BEGIN_SRC ${1:Language} :results ${2:Result(output / file)} :exports ${3:Export What?(code / results / both)}
+
+#+END_SRC
