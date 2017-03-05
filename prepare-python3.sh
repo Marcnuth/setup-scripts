@@ -3,6 +3,7 @@
 sudo apt-get -y install python3-pip
 sudo apt-get -y install python3-setuptools
 sudo apt-get -y install python3-tk
+sudo apt-get -y install python3-mysqldb
 echo '=> Python3-pip is installed'
 
 # machine learning packages
@@ -35,3 +36,6 @@ sudo pip3 install --upgrade yapf
 sudo pip3 install --upgrade ipdb
 sudo pip3 install --upgrade pdb
 ln -sf /usr/local/bin/ipdb3 /usr/local/bin/ipdb 
+
+sudo pip3 install ConfigParser
+sudo pip3 install mysql-python
