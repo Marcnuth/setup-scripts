@@ -39,3 +39,4 @@ ln -sf /usr/local/bin/ipdb3 /usr/local/bin/ipdb
 
 sudo pip3 install ConfigParser
 sudo pip3 install mysql-python
+sudo pip3 install luigi
