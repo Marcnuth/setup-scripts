@@ -2,7 +2,7 @@
 ;; Install necessary packages if not
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ; list the packages you want
-(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode elpy realgud ivy swiper counsel web-mode))
+(setq package-list '(flymd f ecukes ert-runner el-mock markdown-mode image+ json-mode elpy realgud ivy swiper counsel web-mode ess))
 
 (require 'package)
 ; list the repositories containing them
