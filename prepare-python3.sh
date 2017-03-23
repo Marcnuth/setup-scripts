@@ -1,5 +1,6 @@
 
 # python & packages
+sudo apt-get -y install python3-dev
 sudo apt-get -y install python3-pip
 sudo apt-get -y install python3-setuptools
 sudo apt-get -y install python3-tk
@@ -40,3 +41,6 @@ ln -sf /usr/local/bin/ipdb3 /usr/local/bin/ipdb
 sudo pip3 install ConfigParser
 sudo pip3 install mysql-python
 sudo pip3 install luigi
+sudo pip3 install airflow
+sudo pip3 install "airflow[mysql, hive]"
+sudo pip3 install arrow
