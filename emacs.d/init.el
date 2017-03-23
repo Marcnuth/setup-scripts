@@ -59,7 +59,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 113 :width normal))))
+ '(default ((t (:family "Monaco" :foundry "unknown" :slant normal :weight normal :height 98 :width normal))))
  '(cursor ((t (:background "yellow"))))
  '(highlight ((t (:background "chartreuse" :foreground "black"))))
  '(region ((t (:background "chartreuse" :foreground "black")))))
@@ -174,3 +174,12 @@
 (setq web-mode-ac-sources-alist
   '(("css" . (ac-source-css-property))
     ("html" . (ac-source-words-in-buffer ac-source-abbrev))))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;
+(defun kill-other-buffers ()
+    "Kill all other buffers."
+    (interactive)
+    (mapc 'kill-buffer 
+          (delq (current-buffer) 
+                (remove-if-not 'buffer-file-name (buffer-list)))))
