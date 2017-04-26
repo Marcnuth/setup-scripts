@@ -32,3 +32,6 @@ sudo ./prepare-docker.sh
 
 # parepare fonts
 # https://gist.github.com/rogerleite/99819
+
+
+sudo apt-get install sshpass

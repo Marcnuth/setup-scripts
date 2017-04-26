@@ -5,6 +5,7 @@ sudo apt-get -y install python3-pip
 sudo apt-get -y install python3-setuptools
 sudo apt-get -y install python3-tk
 sudo apt-get -y install python3-mysqldb
+sudo apt-get -y install gdb python3-dgb
 echo '=> Python3-pip is installed'
 
 # machine learning packages
