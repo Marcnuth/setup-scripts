@@ -35,3 +35,4 @@ sudo ./prepare-docker.sh
 
 
 sudo apt-get install sshpass
+sudo apt-get -y install r-base-core
