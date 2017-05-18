@@ -106,6 +106,7 @@
  (quote org-babel-load-languages)
  (quote ((dot . t)
 	 (python . t)
+	 (R . t)
 	 )))
 
 (defun my-org-confirm-babel-evaluate (lang body)
