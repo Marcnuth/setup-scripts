@@ -6,10 +6,10 @@ fi
 echo '=> Emacs is installed'
 
 ## config emacs preparetion
-sudo apt-get install ruby-dev
+sudo apt-get -y install ruby-dev
 sudo gem install redcarpet --conservative
 
-sudo apt-get install graphviz
+sudo apt-get -y install graphviz
 
 
 ## add config files
