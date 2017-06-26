@@ -8,6 +8,7 @@ if [ $? -ne 0 ]; then
     echo "deb https://apt.dockerproject.org/repo ubuntu-xenial main" | sudo tee /etc/apt/sources.list.d/docker.list
     sudo apt update
     sudo apt-get -y install docker-engine
+    sudo apt-get -y install aufs-tools
     sudo service docker start
     sudo groupadd docker
     sudo usermod -aG docker $USER
