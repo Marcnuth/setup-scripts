@@ -45,3 +45,5 @@ sudo pip3 install luigi
 sudo pip3 install apache-airflow
 sudo pip3 install "airflow[mysql, hive]"
 sudo pip3 install arrow
+sudo pip3 install pony
+sudo pip3 install mongoengine
